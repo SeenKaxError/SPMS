@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SafetyPatrol.Models.tbl_classification>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-xs-12">
+        <h1>Details</h1>
+        @if (Int32.Parse(Session.Count.ToString()) > 0)
+        {
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Dashboard", "Index", "Home")</li>
+            <li>@Html.ActionLink("Findings", "index", "Findings")</li>
+            <li class="active"><i class="icon-file-alt"></i>Classifications</li>
+
+        </ol>
+        }
+        </div>
+        <div class="col-xs-12">
+        
+        @if (ViewBag.message != null && ViewBag.message  != "") 
+        {
+        <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.message
+        </div>
+         }
+</div>
+<div class="col-xs-12">
+
+<div class="row">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped  table-condensed  table-responsive">
+                <thead>
+                  <tr>
+                  
+                   <th class=""><i class="fa fa-list"></i> Classification </th>
+                    <th class=""><i class="fa fa-exclamation-triangle"></i> Action </th> 
+                  </tr>
+                </thead>
+                <tbody>
+                     @foreach (var item in Model)
+                     {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.classification)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.classid }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.classid }) 
+                                    @*|@Html.ActionLink("Delete", "Delete", new { id = item.classid })*@
+                                </td>
+                            </tr>
+                     }
+                </tbody>
+                </table>
+
+        <p>
+     
+            <a href="@Url.Action("Create")" class="btn btn-primary">Add New</a>
+        </p>
+
+</div>
+</div>
+</div>

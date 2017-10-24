@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SafetyPatrol.Models.tbl_users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            empno
+        </th>
+        <th>
+            emplname
+        </th>
+        <th>
+            empfname
+        </th>
+        <th>
+            empmname
+        </th>
+        <th>
+            password
+        </th>
+        <th>
+            email
+        </th>
+        <th>
+            userlevel
+        </th>
+        <th>
+            aka
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.empno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emplname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empfname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empmname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userlevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aka)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.recno }) |
+            @Html.ActionLink("Details", "Details", new { id=item.recno }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.recno })
+        </td>
+    </tr>
+}
+
+</table>

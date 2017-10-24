@@ -1,0 +1,55 @@
+﻿@model SafetyPatrol.Models.tbl_users
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_users</legend>
+
+    <div class="display-label">empno</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empno)
+    </div>
+
+    <div class="display-label">emplname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.emplname)
+    </div>
+
+    <div class="display-label">empfname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empfname)
+    </div>
+
+    <div class="display-label">empmname</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.empmname)
+    </div>
+
+    <div class="display-label">password</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.password)
+    </div>
+
+    <div class="display-label">email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">userlevel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.userlevel)
+    </div>
+
+    <div class="display-label">aka</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.aka)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.recno }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

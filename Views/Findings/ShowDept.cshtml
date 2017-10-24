@@ -1,0 +1,73 @@
+﻿@model IList<SafetyPatrol.Models.tbl_dataFindings>
+@{
+    ViewBag.Title = "Safety Patrol Monitoring";
+    Layout = "~/Views/Shared/_MainTemplate.cshtml";   
+                   
+} 
+<div class="col-xs-12">
+<div class="row-fluid">  
+<table id="depttable" class="table table-bordered table-hover table-striped  table-condensed  table-responsive display compact">
+                <thead>
+                  <tr>
+                  <th class="">Item Code</th>
+                    <th class="col-lg-2 col-xl-2"><i class="fa  fa-picture-o"></i> Thumbnail </th>
+                    <th class="col-lg-2 col-xl-2"><i class="fa fa-list"></i> Description </th>
+                     <th class=""><i class="fa fa-list"></i> Classification </th>
+                    <th class=""><i class="fa fa-calendar-o"></i> Date </th>
+                    <th class=""><i class="fa fa-home"></i> Area / Department </th>
+                    @*<th class=""><i class="fa fa-exclamation-triangle"></i> Action </th>*@
+                  </tr>
+                </thead>
+                <tbody> 
+
+                 @foreach (var m in Model)
+                 {
+                     string cclass = "";
+                     
+                     if(m.status == 1){
+                        cclass="warning"; 
+                     }
+                     else if(m.status == 2)
+                     {
+                        cclass="danger";
+                     }
+                     else if (m.status == 3)
+                     {
+                     cclass="success";
+                     }
+					<tr class="@cclass 1">
+                    <td>
+                    <p class="vert-align text-center">
+                    <a href="@Url.Action("Details", new { id = m.itemcode })"  target="_blank">@m.itemcode</a>
+                    </p></td>
+                    <td>
+                   <a href="@Url.Action("Details", new { id = m.itemcode })" target="_blank">
+                    @if (m.imagePath != null)
+                    {   
+                    <img style="width:125px;" src="@Url.Content("~/fileImages/")@m.imagePath"  alt="" class="img-thumbnail img-responsive center-block img-center" />
+                    }
+                    else { 
+                    <img  style="width:125px;"  src="@Url.Content("~/Content/images/default-image.png")"  alt="" class="img-thumbnail img-responsive center-block img-center"></img>
+                    }</a>
+                    </td>    
+                    <td>@m.description</td>
+                    <td>@m.classification</td>
+                    <td>@m.recdate.ToString("d")</td>
+                    <td>@m.areacode</td>
+                
+                  </tr>
+                 }
+        
+                </tbody>
+              </table>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#depttable').dataTable(
+        {
+             "aaSorting": [[0, "desc"]] 
+        } 
+        );
+    });
+</script>

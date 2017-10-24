@@ -1,0 +1,107 @@
+﻿@model SafetyPatrol.Models.tbl_dataFindings
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>tbl_dataFindings</legend>
+
+        @Html.HiddenFor(model => model.recno)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.itemcode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.itemcode)
+            @Html.ValidationMessageFor(model => model.itemcode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.classification)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.classification)
+            @Html.ValidationMessageFor(model => model.classification)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.areacode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.areacode)
+            @Html.ValidationMessageFor(model => model.areacode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.areaincharge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.areaincharge)
+            @Html.ValidationMessageFor(model => model.areaincharge)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.status)
+            @Html.ValidationMessageFor(model => model.status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.recby)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.recby)
+            @Html.ValidationMessageFor(model => model.recby)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.completeddate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.completeddate)
+            @Html.ValidationMessageFor(model => model.completeddate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.recdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.recdate)
+            @Html.ValidationMessageFor(model => model.recdate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ignore)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ignore)
+            @Html.ValidationMessageFor(model => model.ignore)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "Safety Patrol Monitoring";
+}
+
+<!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+       
+        <a class="navbar-brand " href="index.html"> <img  src="../../Content/images/safety.jpg" /> Safety Patrol Monitoring</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+        <li><a href="/Findings/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-chevron-down"></i> Findings <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li >@Html.ActionLink("List","Index", "Findings")</li>
+            <li>@Html.ActionLink("New","NewFindings", "Findings")</li>
+            </ul>
+        </li>
+        <li><a href=""><i class="fa fa-users"></i> Manage Department</a></li>
+     
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right navbar-user">
+         
+        <li class="dropdown user-dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> SES Staff <b class="caret"></b></a>
+            <ul class="dropdown-menu"> 
+            <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+            </ul>
+        </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-lg-12">
+        <h1>List of Findings</h1>
+        <ol class="breadcrumb">
+            <li><a href=""><i class="icon-dashboard"></i> Dashboard</a></li>
+            <li class="active"><i class="icon-file-alt"></i> Findings</li>
+        </ol>
+
+        </div>
+    </div><!-- /.row -->
+     
+    <div class="col-lg-12">
+            
+            
+            <div class="well well-sm">
+            <!-- Standard button -->
+            <button type="button" class="btn btn-default">ALL</button>
+            <button type="button" class="btn btn-warning">FOR REVIEW</button>
+            <button type="button" class="btn btn-success">COMPLETED</button>
+            <button type="button" class="btn btn-primary">NEW FINDING</button> 
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped  table-condensed  ">
+                <thead>
+                  <tr>
+                  <th class="">Item #</i></th>
+                    <th class="col-lg-2 col-xl-2"><i class="fa  fa-picture-o"></i> Thumbnail </th>
+                    <th class="col-lg-2 col-xl-2"><i class="fa fa-list"></i> Description </th>
+                     <th class=""><i class="fa fa-list"></i> Category </th>
+                    <th class=""><i class="fa fa-calendar-o"></i> Date </th>
+                    <th class=""><i class="fa fa-home"></i> Department </th>
+                    <th class=""><i class="fa fa-exclamation-triangle"></i> Action </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="completed">
+                    <td><p class="vert-align text-center">1</p></td>
+                    <td><img src="../../Content/images/default-image.png"  alt="" class="img-thumbnail" ></img></td>
+                    <td>Automatic Water Refill System Fail.</td>
+                    <td>Damaged Equiptment/Facilities</td>
+                    <td>January 6, 2013</td>
+                    <td>ADMIN</td>
+                    <td class=""> 
+                    <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Select <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">View </a></li>
+                            <li><a href="#">Edit </a></li>
+                            </ul>
+                    </div>
+                    </td>
+                  </tr>
+                  <tr class="success">
+                    <td class=""><p class="vert-align text-center">2</p></td>
+                    <td><img src="../../Content/images/default-image.png"  alt="" class="img-thumbnail"></img></td>
+                    <td>RAIN WATER LEAKING</td>
+                    <td>Damaged Equiptment/Facilities</td>
+                    <td>January 14, 2014</td>
+                    <td>POG</td>
+                     <td class=""> 
+                    <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Select <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                            <li><a href="#">View </a></li>
+                            <li><a href="#">Edit </a></li>
+                            </ul>
+                    </div>
+                    </td>
+                  </tr>
+                   
+                </tbody>
+              </table>
+            </div>
+               </div>
+ 
+        <div class="col-lg-4 col-lg-offset-8">
+            
+            <div class="pull-right">
+              <ul class="pagination pagination-sm">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </div>
+        </div><!-- /.row -->
+       
+     
+        </div><!-- /.row -->
+
+    </div><!-- /#page-wrapper -->

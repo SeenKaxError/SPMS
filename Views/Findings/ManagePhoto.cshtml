@@ -1,0 +1,87 @@
+﻿@model IList<SafetyPatrol.Models.tbl_images>
+@{
+    ViewBag.Title = "Manage Photo";
+    Layout = "~/Views/Shared/_MainTemplate.cshtml";
+   
+}
+<div class="col-xs-12">
+        <h1>Manage Photo</h1>
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Dashboard", "Index", "Findings")</li>
+            <li>@Html.ActionLink("Findings", "index", "Findings")</li>
+            <li>@Html.ActionLink("Details", "Details", new { @id = ViewBag.item_code })</li>
+            <li class="active"><i class="icon-file-alt"></i>@ViewBag.item_code</li>
+
+        </ol>
+
+        </div>
+        <div class="col-xs-12">
+        @if (ViewBag.message != null && ViewBag.message  != "") 
+        {
+        <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.message
+        </div>
+         }
+</div>
+<div class="col-xs-12">
+
+ <div class="col-xs-12">
+ 
+             <div class="panel panel-info">
+              <div class="panel-heading"><h5>Item Code: <strong> @ViewBag.item_code </strong></h5></div>
+              <div class="panel-body">
+              <div class="row">
+               <div class="col-xs-12">
+                    @foreach(var m in Model){
+                    <div class="col-xs-4">
+                    <div class="well">
+                       <img src="@Url.Content("~/fileImages/")@m.imagename" class="img-thumbnail img-responsive" />
+                      @*@using (Html.BeginForm("DeletePhoto", "Findings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                           { 
+                         *@ 
+                        <form action="@Url.Action("DeletePhoto", "Findings")" method="post" enctype = "multipart/form-data">
+                        <input type="hidden" name="imgid" value="@m.recno" />
+                        <input type="hidden" name="itemcode" value="@ViewBag.item_code"  />
+                    
+                        <button style="margin-top: 5px;" type="submit" class="btn btn-danger center-block btn-xs" >Remove</button>
+                        </form>
+                        </div>
+                    </div>
+                    }
+                        </div>
+               </div>
+               <div class="col-xs-12" style="margin-top: 10px;">
+               
+                <fieldset><legend></legend>
+                 @using (Html.BeginForm("AddPhoto", "Findings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                 {  
+                     <label>Add Photo</label>
+                     <input type="hidden" name="itemcode" value="@ViewBag.item_code"  />
+                   
+                      <div class="form-group">
+                      <input type="file" name="files"  accept="image/*" />
+                      <br />
+                      <button type="submit" class="btn btn-default btn-sm   " >Upload</button>
+                   
+                      </div>
+                     
+                      
+                 }
+                 </fieldset>
+               </div>
+             </div>
+			   <div class="panel-footer" style="overflow:hidden;">
+                        <div class="col-lg-6">
+                            <p>
+                           @Html.ActionLink("Details", "Details", new { @id = ViewBag.item_code }) |
+                            @Html.ActionLink("Back to List", "Index")
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                  
+                        
+                        </div>
+               </div>
+            </div>   
+          </div> 
+

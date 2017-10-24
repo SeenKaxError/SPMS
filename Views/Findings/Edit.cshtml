@@ -1,0 +1,156 @@
+﻿@model SafetyPatrol.Models.DBFindingsImagesActions
+ 
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainTemplate.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+     
+ 
+ 
+<div class="col-xs-12">
+        <h1>Edit</h1>
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Dashboard", "Index", "Findings")</li>
+            <li>@Html.ActionLink("Findings", "index", "Findings")</li>
+            <li class="active"><i class="icon-file-alt"></i>@Model.dataFindings.itemcode</li>
+
+        </ol>
+
+        </div>
+        <div class="col-xs-12">
+        @if (@ViewBag.Message != "")
+        {
+        <div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.Message  <a href="@Url.Action("Details", new { id = Model.dataFindings.itemcode })"> View Changes</a>
+        </div>
+        }
+        
+</div> 
+ <div class="col-xs-12">
+             <div class="panel panel-default">
+              <div class="panel-heading"><h5>@Model.dataFindings.itemcode</h5></div>
+ @using (Html.BeginForm("Edit", "Findings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {             
+ <div class="panel-body">
+ 
+    @Html.ValidationSummary(true)
+    <fieldset>
+     
+        @Html.HiddenFor(model => model.dataFindings.recno)
+        @Html.HiddenFor(model =>  model.dataFindings.imagePath)
+        @Html.HiddenFor(model => model.dataFindings.areacode)
+        @Html.HiddenFor(model => model.dataFindings.recby)
+       <div class="col-xs-6"> 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.itemcode)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.dataFindings.itemcode, new { @readonly = "readonly", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.dataFindings.itemcode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.description)
+        </div>
+        <div class="editor-field">
+          @*  @Html.EditorFor(model => model.dataFindings.description)*@
+           @Html.TextAreaFor(m => m.dataFindings.description, new { @class = "form-control" })
+           @Html.ValidationMessageFor(model => model.dataFindings.description)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.classification)
+        </div>
+        <div class="editor-field">
+          @Html.DropDownListFor(m => m.dataFindings.classification, (IEnumerable<SelectListItem>)ViewBag.Classification, new { @class = "form-control" })
+           @Html.ValidationMessageFor(model => model.dataFindings.classification)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.areacode)
+
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("areacode", (IEnumerable<SelectListItem>)ViewBag.areanames, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.dataFindings.areacode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.areadetails)
+        </div>
+        <div class="editor-field">
+           @Html.TextAreaFor(m => m.dataFindings.areadetails, new { @class = "form-control" })
+           @Html.ValidationMessageFor(model => model.dataFindings.areadetails)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.dataFindings.status)
+        </div>
+        <div class=" ">
+            @*@Html.TextBoxFor(model => model.dataFindings.status,"")*@
+            @{
+       Dictionary<string, string> dictionary = new Dictionary<string, string>();
+       dictionary.Add("Pending", "1");
+       dictionary.Add("For Review", "2");
+       dictionary.Add("Completed", "3");
+       SelectList list = new SelectList(dictionary, "value", "key", Model.dataFindings.status);
+            }
+            @Html.DropDownListFor(model => model.dataFindings.status, list, new { @class = "form-control" })
+            @*@Html.DropDownListFor(model => model.dataFindings.status, (IEnumerable<SelectListItem>)ViewBag.sList, new { @class = "input-control" })*@
+             @Html.ValidationMessageFor(model => model.dataFindings.status)
+        </div>
+        </div>
+      
+       
+        <div class="col-xs-6">
+       
+        @if (Model.images.Count() > 0)
+        {
+         
+            <div class="form-group">
+                <label>Image Thumb</label>
+            </div>
+             <div class="form-group" style="overflow:hidden;">
+            
+                @foreach (var m in Model.images)
+                {
+                    String stcheked = "";
+
+                    if (m.imagename == Model.dataFindings.imagePath) {
+                        stcheked = "checked";
+                    }
+                    <div class="well well-sm col-xs-3" style="margin:5px;">
+                       <img src="@Url.Content("~/fileImages/")@m.imagename" class="img-thumbnail img-responsive center-block img-center"  />
+                    <div class="radio">
+                         <label>
+                            <input style="text-align:center; vertical-align:middle"  type="radio" name="checkimagepath" value="@m.imagename" @stcheked/>
+                            Select image
+                         </label>
+                    </div>
+                    </div>
+                 }
+              </div> 
+           }
+          <div class="form-group">
+           @Html.ActionLink("Manage Photos", "ManagePhoto", new { @id = Model.dataFindings.itemcode })
+         </div> 
+         </div>
+   </fieldset>
+</div>
+<div class="panel-footer" style="overflow:hidden;">
+                <p class="pull-right">
+                    <button class="btn btn-primary" type="submit">Update</button>             
+                </p>
+   </div>
+  }
+</div>   
+</div>
+   
+<div>
+<div class="">
+ @Html.ActionLink("Back to List", "Index") | <a href="@Url.Action("Details", new { id = Model.dataFindings.itemcode })"> View Details</a> 
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+        $('.bxslider').bxSlider();
+    });
+</script>  

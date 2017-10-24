@@ -1,0 +1,65 @@
+﻿@model SafetyPatrol.Models.tbl_dataFindings
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_dataFindings</legend>
+
+    <div class="display-label">itemcode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.itemcode)
+    </div>
+
+    <div class="display-label">description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">classification</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.classification)
+    </div>
+
+    <div class="display-label">areacode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.areacode)
+    </div>
+
+    <div class="display-label">areaincharge</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.areaincharge)
+    </div>
+
+    <div class="display-label">status</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.status)
+    </div>
+
+    <div class="display-label">recby</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.recby)
+    </div>
+
+    <div class="display-label">completeddate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.completeddate)
+    </div>
+
+    <div class="display-label">recdate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.recdate)
+    </div>
+
+    <div class="display-label">ignore</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ignore)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.recno }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

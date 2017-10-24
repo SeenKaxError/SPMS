@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Safety Patrol Monitoring - New Finding";
+}
+
+<!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+       
+        <a class="navbar-brand " href="index.html"> <img  src="../../Content/images/safety.jpg" /> Safety Patrol Monitoring</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+        <li><a href="/Findings/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-chevron-down"></i> Findings <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li >@Html.ActionLink("List","Index", "Findings")</li>
+            <li>@Html.ActionLink("New","NewFindings", "Findings")</li>
+            </ul>
+        </li>
+        <li><a href=""><i class="fa fa-users"></i> Manage Department</a></li>
+     
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right navbar-user">
+         
+        <li class="dropdown user-dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> SES Staff <b class="caret"></b></a>
+            <ul class="dropdown-menu"> 
+            <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+            </ul>
+        </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-lg-12">
+        <h1>Add New Finding</h1>
+        <ol class="breadcrumb">
+            <li><a href=""><i class="icon-dashboard"></i> Dashboard</a></li>
+            <li><a href=""><i class="icon-file-alt"></i> Findings</a></li>
+            <li class="active"><i class="icon-file-alt"></i> New</li>
+
+        </ol>
+
+        </div>
+    </div><!-- /.row -->
+     <div class="row"> 
+            <div class="col-lg-12">
+             <div class="panel panel-default">
+              <div class="panel-heading">Item # 78810</div>
+              <div class="panel-body">
+              <form role="form">
+              <div class="col-lg-6">
+              <div class="form-group">
+                <label>Photo Upload</label>
+                <input type="file" />
+              </div>
+                      <div class="">
+                      <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-info" style="width: 45%"></div>
+                      </div>
+                    </div>
+              </div>
+                 <div class="col-lg-6">
+                   <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" cols="" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <select class="form-control">
+                    <option>Cat 1</option>
+                    <option>Cat 2</option>
+                    <option>Cat 3</option>
+                    <option>Cat 4</option>
+                </select>
+              </div>
+             <div class="form-group">
+                <label>Area In Charge</label>
+                <select class="form-control">
+                  <option>Admin</option>
+                  <option>PEG</option>
+                  <option>POG</option>
+                  <option>Logistics</option>
+                  <option>Purchasing</option>
+                </select>
+              </div> 
+                 </div>
+                 
+                 <div class="col-lg-12">
+                   <div class="pull-right">
+                    <button type="submit" class="btn btn-default">Submit Button</button>
+                   
+                    </div>
+                 </div>
+                 </form>
+              </div>
+			   <div class="panel-footer">
+             
+               </div>
+            </div>   
+          </div>
+             
+            </div>
+     </div><!-- /.row -->
+
+    </div><!-- /#page-wrapper -->

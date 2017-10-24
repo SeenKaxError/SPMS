@@ -1,0 +1,87 @@
+﻿@model IEnumerable < SafetyPatrol.Models.tbl_dataFindings >
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            itemcode
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            classification
+        </th>
+        <th>
+            areacode
+        </th>
+        <th>
+            areaincharge
+        </th>
+        <th>
+            status
+        </th>
+        <th>
+            recby
+        </th>
+        <th>
+            completeddate
+        </th>
+        <th>
+            recdate
+        </th>
+        <th>
+            ignore
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.itemcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.classification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.areacode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.areaincharge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recby)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.completeddate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ignore)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.recno }) |
+            @Html.ActionLink("Details", "Details", new { id=item.recno }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.recno })
+        </td>
+    </tr>
+}
+
+</table>

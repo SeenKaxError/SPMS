@@ -1,0 +1,334 @@
+﻿@*@model IList<SafetyPatrol.Models.BarChartValue>*@
+@model SafetyPatrol.Models.dashboard
+
+@{
+    ViewBag.Title = "Safety Patrol Monitoring";
+    Layout = "~/Views/Shared/_MainTemplate.cshtml";
+    int pending = ViewBag.F_pending;
+    int forReview = ViewBag.F_review;
+    int complted = ViewBag.F_completed;
+}
+ 
+ <div class="row">
+        <div class="col-xs-12">
+        <h1>@ViewBag.pagename</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index","Home")"><i class="icon-dashboard"></i> Dashboard</a>
+            </li>
+            @*<li class="active"><i class="icon-file-alt"></i> Blank Page</li>*@
+          
+        </ol>
+        </div>
+</div><!-- /.row --> 
+
+ <div class="row">
+ <div class="col-xs-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Pie Graph</h3>
+              </div>
+              <div class="panel-body">
+                <div class="">
+                  <div class=" " id="piechart" style="width: 250px;" ></div>
+                </div>
+                <div class="text-right">
+                  <a href="@Url.Action("Index","Findings")">View Findings <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+ 
+</div> <!-- lg-6-->
+ <div class="col-xs-8">
+        <div class="col-xs-12">
+          <div class="col-xs-6">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-comments fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">@ViewBag.noOfFindings</p>
+                    <p class="announcement-text">Total Findings!</p>
+                  </div>
+                </div>
+              </div>
+                <a href="@Url.Action("Index","Findings", new { dstatus = 0})">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      View Findings
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-check fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">@ViewBag.F_pending</p>
+                    <p class="announcement-text">To Follow up</p>
+                  </div>
+                </div>
+              </div>
+              <a href="@Url.Action("Index","Findings", new { dstatus = 1})">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      View List
+					</div>
+                    <div class="col-xs-6 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          </div>
+          <div class="col-xs-12">
+          <div class="col-xs-6">
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-tasks fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">@ViewBag.F_review</p>
+                    <p class="announcement-text">For Review</p>
+                  </div>
+                </div>
+              </div>
+                <a href="@Url.Action("Index","Findings", new { dstatus = 2})">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      Review List
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <i class="fa fa-comments fa-5x"></i>
+                  </div>
+                  <div class="col-xs-6 text-right">
+                    <p class="announcement-heading">@ViewBag.F_completed</p>
+                    <p class="announcement-text">Completed Findings!</p>
+                  </div>
+                </div>
+              </div>
+                <a href="@Url.Action("Index","Findings", new { dstatus = 3})">
+                <div class="panel-footer announcement-bottom">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      Completed Findings
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <i class="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          </div>
+       </div> <!-- lg-6 -->
+
+        </div><!-- /.row -->
+<div class="row">
+<div class="col-xs-12">
+        <div class="panel panel-primary">
+        <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Trending</h3>
+        </div>
+        <div class="panel-body">
+        @if (ViewBag.Message != "")
+        {
+         <div class="alert alert-danger alert-dismissable" id="errselection"  ><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.Message 
+         </div>
+            }
+        <div class="well well-sm text-center">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <div class="input-group">
+                    <label for="year" class="control-label" >Year:</label>
+                    <div class='input-group date' id='datetimepicker1' >
+                        <input data-date-format="YYYY" type='text' class="form-control" name="year" value="@ViewBag.syear" placeholder="" />
+                        <span class="input-group-addon"><span class="fa fa-calendar icon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group ">
+                    <label for="month" class="control-label" >Month:</label>
+                    <div class='input-group date inline' id='datetimepicker2' >
+                        <input data-date-format="MMMM" type='text' class="form-control" value="@ViewBag.smonth" name="month" placeholder="" />
+                        <span class="input-group-addon"><span class="fa fa-calendar icon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group">
+              <label for="month" class="control-label" >&nbsp;</label>
+                <div class="input-group">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </div>
+            </form>
+             <div class="col-xs-12" style="margin-top:10px;padding:10px;" ><hr />&nbsp;<br /><hr /></div>
+                <div id="chart_div" style="width: 100%;"></div>
+            </div>
+            <div class="well">
+                <div id="chart_div2" style="width: 100%;"></div>
+            </div>
+
+
+</div>
+</div>
+</div>
+</div>
+ @{
+     string dstring = "";
+     string coma = "";
+
+     foreach(var mcv in Model.bcv){
+      
+       dstring = dstring + coma + " [ '" + mcv.DeptName + "' ," + mcv.completed + "," + mcv.pending + " , " + mcv.review + " ," + mcv.ChartValue  + " ]";
+       coma = ",";
+     }
+     
+     string cstring = "";
+     coma = "";
+     foreach (var mcc in Model.bcc)
+     {
+
+         cstring = cstring + coma + " [ '" + mcc.categories + "' ," + mcc.count1 + " ," + mcc.count1 + " ]";
+         coma = ",";
+     }
+     
+     }
+    
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ <script type="text/javascript">
+
+     $(document).ready(function () {
+
+        $(".fancybox").fancybox();
+        $('#datetimepicker1').datetimepicker({
+            pickTime: false,
+            viewMode: 'years',
+            minViewMode: 'years'
+        });
+        $('#datetimepicker2').datetimepicker({
+            pickTime: false ,
+            viewMode: 'months',
+            minViewMode: 'months'
+        });
+
+        
+
+      });
+      
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart); 
+        google.setOnLoadCallback(drawChart1); 
+
+        
+           
+      function drawChart() {
+        var data1 = google.visualization.arrayToDataTable([
+          ['Status', 'Hours per Day'],
+          ['Pending',     @pending ],
+          ['Review',      @forReview],
+          ['Completed',    @complted]
+        ]);
+
+        var options1 = {
+          Rheight: 240,
+          title: 'Total SES Findings',
+          legend: {position: 'top'},
+          is3D : true,
+          colors: ['#F1CA3A', '#D3362D',  '#5F9654', 'green', 'yellow', 'gray']
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart1.draw(data1, options1);
+        
+        /// end pie chart //
+
+          var data = google.visualization.arrayToDataTable(
+                    [['Department', 'Completed', 'Pending','For Review' , { role: 'annotation' }],@{ @Html.Raw(dstring); }]
+                    );
+                     
+
+               var options = {
+                    title: 'SES Data Findings',
+                    hAxis: { title: 'Department', titleTextStyle: { color: 'red'} },
+                    isStacked: true,
+                    legend: {position: 'top'},
+                    colors: ['#5F9654', '#F1CA3A',  '#D3362D', 'green', 'yellow', 'gray']
+                };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        
+        }
+       ////////////////**end  dept column***/////////////////
+ 
+function drawChart1() {
+
+                        var  data2 = google.visualization.arrayToDataTable(
+                            [['CLASSIFICATION','COUNT' , { role: 'annotation' }],@{ @Html.Raw(cstring);}]
+                            );
+                        var options2 = {
+                                            title: 'Data Findings Classifications',
+                                            hAxis: {title: 'Count', titleTextStyle: {color: 'red'}},
+                                            chartArea: {
+                                                            left: "25%",
+                                                            top: "10%",
+                                                            height: "80%",
+                                                            width: "100%"
+                                                        },
+                                            vAxis: {
+                                                title:"CLASSIFICATIONS"  , titleTextStyle: {color: 'green'}  
+                                            },
+                                            hAxis:{
+                                                title: "# OF OCCURRENCE"  , titleTextStyle: {color: 'red'} 
+                                            },
+                                            legend: {position: 'top'} ,
+                                            width: '100%',
+                                            height: '100%',
+                                            axisTitlesPosition: 'out', 
+                                            pieSliceText: 'percentage',
+                                            colors: ['#f97263']
+                                        };
+
+                        var chart2 = new google.visualization.BarChart(document.getElementById('chart_div2'));
+                        chart2.draw(data2, options2); 
+                        }
+ 
+    </script>
+     

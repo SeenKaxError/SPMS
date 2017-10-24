@@ -1,0 +1,378 @@
+﻿@model SafetyPatrol.Models.DBFindingsImagesActions
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainTemplate.cshtml";
+}
+@{
+    string st = "";
+    int ulevel;
+    if(Session.Count > 0){
+    ulevel = Int32.Parse(Session["userlevel"].ToString());
+    }else{
+        ulevel = 0;
+    }
+    string classstatus = "";
+    if (Model.dataFindings.status == 1)
+    {
+        st = "Pending";
+        classstatus = "warning";
+    }
+    else if (Model.dataFindings.status == 2)
+    {
+        st = "For Review";
+        classstatus = "danger";
+    }
+    else if (Model.dataFindings.status == 3)
+    {
+        st = "Completed";
+        classstatus = "success";
+    }
+}
+<div class="col-xs-12">
+        <h1>Details</h1>
+        @if (Int32.Parse(Session.Count.ToString()) > 0)
+        {
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Dashboard", "Index", "Findings")</li>
+            <li>@Html.ActionLink("Findings", "index", "Findings")</li>
+            <li class="active"><i class="icon-file-alt"></i>@Model.dataFindings.itemcode</li>
+
+        </ol>
+        }
+        </div>
+        <div class="col-xs-12">
+        
+        @if (ViewBag.message != null && ViewBag.message  != "") 
+        {
+        <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.message
+        </div>
+         }
+</div>
+ 
+ <div class="col-xs-12">
+             <div class="panel panel-@classstatus">
+              <div class="panel-heading"><h5>Item Code: <strong></strong>@Html.DisplayFor(model => model.dataFindings.itemcode) <strong></strong></h5></div>
+              <div class="panel-body">
+               <div class="col-xs-12">
+                 <ul class="bxslider">
+
+                 @if (Model.images.Count() > 0 )
+                 {
+                     for(var i = 0; i < Model.images.Count(); i++ ){ 
+                        <li>
+                             <a class="fancybox" rel="group" title="@Model.dataFindings.description" href="@Url.Content("~/fileImages/")@Model.images[i].imagename">
+                             <img id="blah-@i"  style="height: 500px;"  class="img-thumbnail  center-block img-center"  src="@Url.Content("~/fileImages/")@Model.images[i].imagename" alt="@Model.images[i].itemcode" />
+                             </a>
+                         </li> 
+                      }
+                 }
+                  else{
+                        <li>
+                                <a class="fancybox" rel="group" href="@Url.Content("~/Content/images/default-image.png")">
+                                <img id="blah"  title="test"  class="img-thumbnail  center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+                                </a>
+                        </li>
+                  }
+                </ul>
+
+
+               </div>
+               <div class="col-xs-12">
+               <div class="col-xs-6">
+                    <div class="form-group">
+                    <label>Description:</label>
+                    @Html.DisplayFor(model => model.dataFindings.description)
+                    </div>
+                     
+                     <div class="form-group">
+                        <label>Classification:</label>
+                        @Html.DisplayFor(model => model.dataFindings.classification)
+                     </div>
+                    <div class="form-group">
+                        <label>Area:</label>
+                        @Html.DisplayFor(model => model.dataFindings.areacode)
+                    </div>
+                    <div class="form-group">
+                        <label>Area Details:</label>
+                       @Html.DisplayFor(model => model.dataFindings.areadetails) 
+                    </div>
+
+                    
+               </div>
+               <div class="col-xs-6">
+                     <div class="form-group">
+                        <label>Department:</label>
+                       @Html.DisplayFor(model => model.dataFindings.department) 
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        @Model.dataFindings.recdate.ToString("MMM dd, yyyy")
+                     </div>
+                  
+                  <div class="form-group">
+                      
+                        <label>Status:</label>
+                    
+                       @if(ulevel > 0){
+                        <p class="pull-right">
+                        <div class="btn-group">
+                        @if (@Model.dataFindings.status != 3)
+                        {
+                        <button type="button" class="btn btn-@classstatus"><i class="fa fa-thumb-tack fa-fw"></i>@st</button>
+                        <button type="button" class="btn btn-@classstatus dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                           @* <li><a href="@Url.Action("MarkasCompleted", "Findings", new { @id = Model.dataFindings.itemcode })"><i class="fa fa-check fa-fw"></i>  Mark as Completed</a></li>*@
+                            <li><a href="#mailIncharge" class="fancybox"><i class="fa fa-envelope fa-fw"></i>  Remind Incharge</a></li>
+                            <li><a class="fancybox" href="#confirm"><i class="fa fa-check fa-fw"></i>  Mark as Completed</a></li>
+                       
+                        </ul>
+                        }
+                        else { 
+                        <a class="btn btn-success" href=""><i class="fa fa-check fa-fw"></i>Complete</a> 
+                         }
+                        </div>
+                        </p>
+                       }
+                       else
+                       {
+                           @st
+                       }
+                     </div>
+               </div>
+                     
+              
+              
+              </div>
+              </div>
+			   <div class="panel-footer" style="overflow:hidden;">
+                        <div class="col-lg-6">
+                             @if (Int32.Parse(Session.Count.ToString()) > 0)
+                             {
+                                <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.dataFindings.itemcode }) |
+                                @Html.ActionLink("Back to List", "Index")
+                                </p>
+                             }
+                        </div>
+                        <div class="col-lg-6">
+                  
+                        
+                        </div>
+               </div>
+            </div>   
+          </div>
+          
+      
+ 
+
+
+<div class="col-xs-12">
+
+         <div class="panel panel-warning">
+         <div class="panel-heading"><h5>Actions</h5></div>
+                      <div class="panel-body">
+                       <ul class="list-group">
+         
+                        @if (Model.d_actions.Count() > 0)
+                        {
+                            for (var i = 0; i < Model.d_actions.Count(); i++)
+                            { 
+                               
+                                <li class="list-group-item" style="overflow:hidden;">
+                                 <div class="row">
+                                 <div class="col-xs-2">
+
+                                 @{
+                                var userpic = @Model.d_actions[i].empno + ".jpg";
+                                 }
+                                     <span class="avatar"><img style="width: 50px;" src="@Url.Content("~/Content/images/users/")@userpic" class="img-thumb img-responsive" /></span>
+                                     
+                                  </div>
+                                  <div class="col-xs-10">
+                                     <div class="col-xs-5">
+                                     <span class="message"><i class=" fa fa-comment"></i> @Model.d_actions[i].remarks</span><span class="time">
+                                     <br />
+                                     <i class="fa fa-clock-o"></i> @Model.d_actions[i].recdate</span>            
+                                     </div>
+                                     <div class="col-xs-7">
+                                        
+                                           
+                                                          @if(@Model.d_actions[i].actionimage !="" && @Model.d_actions[i].actionimage != null ){
+                                                                <div class="row">
+                                                                    <div class="col-xs-3">
+                                                                     
+                                                                        <div class="thumbnail">
+                                                                         <a class="fancybox" rel="@Model.d_actions[i].actioncode" title="@Model.d_actions[i].remarks" href="@Url.Content("~/fileImages/")@Model.d_actions[i].actionimage">
+                                                                            <img id="blah-@i"  style="height: 50px;"  class="img-thumbnail  center-block img-center"  src="@Url.Content("~/fileImages/")@Model.d_actions[i].actionimage" alt="@Model.d_actions[i].remarks" />
+                                                                            </a>
+                                                                        </div>
+                                                                </div>
+                                                                </div>
+                                                          }
+                                                  
+                                        </div>
+                                    </div>
+                                 </div>
+                                </li>
+                              
+                            }
+                        }
+    
+   
+                        </ul>
+                     </div> 
+        <div class="panel-footer" style="overflow:hidden;">
+            @if (Int32.Parse(Session.Count.ToString()) > 0)
+            {
+                <div class="col-xs-6">
+                    <a  class="btn btn-primary pull-left" href="@Url.Action("Index")">Back</a>
+                </div>
+                <div class="col-xs-6">
+                    <a  class="btn btn-success fancybox pull-right" href="#inline1">Reply</a>
+                </div>
+                
+            }
+            else
+            {
+            
+            <a  class="btn btn-primary fancybox pull-right" href="#Loginbox">Login to Reply</a>
+            }
+
+         </div>   
+         </div>
+<div id="inline1" style="width:500px;display: none;">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title">Actions</h3>
+</div>
+<div class="panel-body">
+  @using (Html.BeginForm("AddActions", "Findings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+              <div class="form-group">
+                 <input type="hidden" name="actionitemcode" value="@Model.dataFindings.itemcode" class="form-control" placeholder="Enter text"/>
+                 <input type="hidden" name="empno" value="@Session["username"]" class="form-control" placeholder="Enter text" />
+
+              </div>
+             
+              <div class="form-group">
+                <label class="">Remarks</label>
+                <textarea class="form-control" rows="3" name="remarks"></textarea>
+              </div>
+              <div class="form-group">
+               <input type='file' id="imgreply" title="" name="imagefile" accept="image/*" />
+               <img id="blah2"   class="img-thumbnail img-responsive center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+              </div> 
+              <div class="form-group">
+              
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="requestforreview" value="forreview">
+                    Request for Review
+                  </label>
+                </div>
+               </div>
+  
+              <button type="submit" class="btn btn-danger pull-right">Submit</button>
+              
+  }
+</div>
+</div>
+</div>
+ 
+</div>
+
+<div id="confirm" style="width: 350px; display:none;">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title">Please Confirm</h3>
+</div>
+<div class="panel-body">
+@*@Url.Action("MarkasCompleted", "Findings", new { @id = Model.dataFindings.itemcode })*@
+@using (@Html.BeginForm("MarkasCompleted", "Findings", new { @id = Model.dataFindings.itemcode }))
+{
+<div class="form-group text-center">
+<div class="well well-sm">
+<p>Are you sure you want this Findings Completed?</p>
+</div>
+<button type="Submit" class="btn btn-success"> Yes</button>
+<button type="Reset" class="btn btn-danger"> No</button>
+</div>
+}
+</div>
+</div>
+</div>
+
+
+<div id="mailIncharge" style="width: 350px; display:none;">
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3 class="panel-title">Sending email to incharge.</h3>
+</div>
+<div class="panel-body">
+@*@Url.Action("MarkasCompleted", "Findings", new { @id = Model.dataFindings.itemcode })*@
+@using (@Html.BeginForm("NotifyIncharge", "Findings"))
+{
+<div class="form-group text-center">
+<div class="well well-sm">
+<p>Notify incharge </p>
+@Html.TextArea("message", new { @class = "form-control" })
+@Html.Hidden("itemcode", Model.dataFindings.itemcode)
+</div>
+<button type="Submit" class="btn btn-success"> Send</button> 
+</div>
+
+
+}
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div id="Loginbox"   style="width:350px;display: none;">
+  <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Please Sign In</h3>
+        </div>
+        <div class="panel-body">
+       @if (ViewBag.Message != "" && ViewBag.Message != null)
+       { 
+        <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.Message
+        </div>
+       }
+            @using (Html.BeginForm("LoginRedirect", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <fieldset>
+                     <input type="hidden" name="redirec" value="@Request.Url.ToString()" />
+                    <div class="form-group">
+                         <label>Employee ID:</label>
+                        <input class="form-control" placeholder="Username / ID" name="username" type="" autofocus>
+                    </div>
+                    <div class="form-group">
+                         <label>HRIS Password</label>
+                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                    </div>
+                     <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+                </fieldset>
+            }
+        </div>
+        <div class="panel-footer">
+      <p class="text-center"><small >PKI - MIS &copy; @DateTime.Now.Year</small></p>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+        $('.bxslider').bxSlider();
+
+    });
+</script>  
+

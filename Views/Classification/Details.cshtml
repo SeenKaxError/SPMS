@@ -1,0 +1,20 @@
+﻿@model SafetyPatrol.Models.tbl_classification
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_classification</legend>
+
+    <div class="display-label">classification</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.classification)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.classid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

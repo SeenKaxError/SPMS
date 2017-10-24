@@ -1,0 +1,157 @@
+﻿@model SafetyPatrol.Models.tbl_dataFindings  
+ 
+ 
+@{
+    ViewBag.Title = "Safety Patrol Monitoring - New Finding";
+    
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+   <div class="row">
+        <div class="col-xs-12">
+        <h1>Add New Finding</h1>
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Dashboard", "Index", "Findings")</li>
+            <li>@Html.ActionLink("Findings", "index", "Findings")</li>
+            <li class="active"><i class="icon-file-alt"></i> New</li>
+
+        </ol>
+
+        </div>
+        <div class="col-xs-12">
+        
+        @if (ViewBag.message != null && ViewBag.message  != "") 
+        {
+        <div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @ViewBag.message
+        </div>
+         }
+        </div>
+    </div><!-- /.row -->
+     <div class="row"> 
+            <div class="col-xs-12">
+             <div class="panel panel-default">
+              <div class="panel-heading"><h5>New Finding</h5></div>
+              <div class="panel-body">
+          @using ( Html.BeginForm("NewFindings", "Findings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+          { 
+               
+            @Html.ValidationSummary(true)                                     
+              <div class="col-xs-6">
+              <div class="form-group">
+               @Html.HiddenFor(m => m.itemcode)
+               @Html.HiddenFor(m => m.recby, new { @Value = @Session["username"] })
+           
+           
+              </div>
+              <div class="form-group col-xs-6">
+               <input type='file' id="imgInp1" title="@ViewBag.imagetemp" name="files" accept="image/*" />
+               <img id="blah1"   class="img-thumbnail img-responsive center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+              @*  @Html.TextBox("descr1", new { @class ="form-control"})*@
+              </div>
+              
+              <div class="form-group col-xs-6">
+               <input type='file' id="imgInp2" title="@ViewBag.imagetemp" name="files" accept="image/*" />
+               <img id="blah2"   class="img-thumbnail img-responsive center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+              </div>
+              
+              <div class="form-group  col-xs-6">
+             
+              <input type='file' id="imgInp3" title="@ViewBag.imagetemp" name="files" accept="image/*" />
+               @Html.HiddenFor(m => m.imagePath)
+              <img id="blah3"   class="img-thumbnail img-responsive center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+             
+              </div>
+              <div class="form-group col-xs-6">
+               <input type='file' id="imgInp4" title="@ViewBag.imagetemp" name="files" accept="image/*" />
+               <img id="blah4"   class="img-thumbnail img-responsive center-block img-center"  src="@Url.Content("~/Content/images/default-image.png")" alt="your image" />
+              
+              </div>
+              
+                  
+              </div>
+        <div class="col-xs-6">
+              <div class="form-group">
+                <label>Description</label>
+               @Html.TextAreaFor(m => m.description, new { @class = "form-control" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.description)</p>
+              </div>
+              <div class="form-group">
+            
+                @Html.LabelFor(m => m.classification)
+                @Html.DropDownListFor(m => m.classification, (IEnumerable<SelectListItem>)ViewBag.Classification, new { @class = "form-control" })
+               <p class="help-block">@Html.ValidationMessageFor(m => m.classification)</p>
+             </div>
+             <div class="form-group">
+                 @Html.LabelFor(m => m.areacode)
+                 @* @Html.TextBoxFor(m => m.areacode, new { @class = "form-control" })*@
+                 @Html.DropDownListFor(m => m.areacode, (IEnumerable<SelectListItem>)ViewBag.areanames, new { @class = "form-control" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.areacode)</p> 
+             </div> 
+             <div class="form-group">
+                <label>Area Details:</label>
+               @Html.TextAreaFor(m => m.areadetails, new { @class = "form-control" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.areadetails)</p>
+              </div>
+             </div>
+                 
+                 <div class="col-xs-12">
+                   <div class="pull-right">
+                    <button type="submit" class="btn btn-default">Submit Button</button>
+                   
+                    </div>
+                 </div>
+          }
+              </div>
+			   <div class="panel-footer">
+             
+               </div>
+            </div>   
+          </div>
+          
+     </div><!-- /.row -->
+
+    
+        <script type="text/javascript">
+
+            function readURL(input, img_id) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        jQuery(img_id).attr('src', e.target.result);
+                        // jQuery('#imagetemp').val(e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+
+            jQuery(document).ready(function () {
+
+                jQuery("#imgInp1").change(function () {
+                     readURL(this,"#blah1");
+                 });
+
+                 jQuery("#imgInp2").change(function () {
+                     readURL(this, "#blah2");
+                 });
+
+
+                 jQuery("#imgInp3").change(function () {
+                     readURL(this, "#blah3");
+                 });
+
+
+                 jQuery("#imgInp4").change(function () {
+                     readURL(this, "#blah4");
+                 });
+
+
+
+
+            });
+             
+    </script>

@@ -1,0 +1,52 @@
+﻿#wrapper
+{
+/**padding-left:0px; **/
+}
+
+#loginbox
+{
+position: absolute;
+right: 40px;
+top: 250px;
+}
+.list-inline
+{
+display: inline-block;
+}
+.btn:hover
+{
+cursor: pointer;
+}
+.message
+{
+display: block;
+}
+.mypagination
+{
+float:right;
+}
+.img-center {margin:0 auto;}
+.field-validation-error
+{
+color: #a94442;
+background-color: #f2dede;
+border-color: #ebccd1;
+    
+}
+.bx-wrapper .bx-controls-direction a
+{
+z-index: 999 ;
+}
+.bx-wrapper .bx-prev
+{
+left: 0px;   
+}
+.bx-wrapper .bx-next
+{
+right: 10px;
+}
+div.morris-hover-point {
+float: left;
+width: 33%;
+display: block;
+}
